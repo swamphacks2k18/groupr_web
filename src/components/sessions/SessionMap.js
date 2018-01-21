@@ -21,12 +21,13 @@ class SessionSelection extends Component {
     return sessions.map((session) => {
       console.log('tw session', session)
       return (
-        <GoogleMapMarker key={session._id} session={session} />
+        <GoogleMapMarker history={this.props.history} key={session._id} session={session} />
       );
     })
   }
   render() {
     const { sessions, longitude, latitude } = this.props;
+    const { push, pop } = this.props.history;
     console.log(longitude, latitude);
 
     if (longitude === 0 && latitude === 0) return this.renderLoader();
@@ -39,8 +40,8 @@ class SessionSelection extends Component {
           markers={this.generateMarkers(sessions)}
         />
         <div className="btn-group">
-          <GrouprButton text="Create Group" />
-          <GrouprButton text="View Your Groups" dark />
+          <GrouprButton text="Create Group" onPress={() => push('/groups/create')}/>
+          <GrouprButton text="View Your Groups" dark  onPress={() => push('/groups')}/>
         </div>
       </div>
     );

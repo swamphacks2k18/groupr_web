@@ -38,6 +38,11 @@
   margin-top: 30px;
 }
 
+.list-info-window {
+  width: 200px;
+  height: 100px;
+  font-size: large;
+}
 .info-window {
   width: 200px;
   height: 100px;

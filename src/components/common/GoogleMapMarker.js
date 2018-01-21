@@ -18,11 +18,11 @@ class GoogleMapMarker extends Component {
     });
   };
 
-  onJoin = (sessionId) => () => {
-    this.props.joinSession(sessionId);
+  onJoin = (sessionId, callback) => () => {
+    this.props.joinSession(sessionId, callback);
   };
 
-  infoWindowCard(session) {
+  infoWindowCard = (session) => {
     const { name, description, owner, endTime, startTime, _id } = session;
     const _class = session.class;
     return (
@@ -43,7 +43,7 @@ class GoogleMapMarker extends Component {
           <div className="info-window-row">
             <label>Owner:</label>
             <p>{owner}</p>
-            <button onClick={this.onJoin(_id)}>join</button>
+            <button onClick={this.onJoin(_id, this.props.history.push)}>join</button>
           </div>
         </div>
       </InfoWindow>

@@ -1,5 +1,5 @@
-import { GET_SESSIONS, GET_LOCATIONS } from './types';
-import { baseUrl, sessionGetInRadius, getLocationsUrl, sessionJoin } from './urls';
+import {GET_SESSIONS, GET_LOCATIONS, CREATE_ACCOUNT} from './types';
+import {baseUrl, sessionGetInRadius, getLocationsUrl, sessionJoin, userCreate, sessionCreate} from './urls';
 import {GET_USER_SESSIONS} from "./index";
 export const getInRadius = (radius) => {
   return async (dispatch) => {
@@ -40,7 +40,7 @@ const getInRadiusServiceCall = async (latitude, longitude, radius, dispatch) => 
      return await response.json();
   };
 
-export const joinSession = (sessionId) => {
+export const joinSession = (sessionId, callback) => {
   return async (dispatch, getState) => {
     const locationsUrl = `${baseUrl}${sessionJoin}`;
     const id = getState().user.id;
@@ -66,6 +66,7 @@ export const joinSession = (sessionId) => {
       type: GET_USER_SESSIONS,
       payload: responseJson,
     });
+    callback('/groups');
     }
   };
 
@@ -93,3 +94,36 @@ export const getLocations = () => {
     });
     }
   };
+
+export const sessionCreateServiceCall = (name, _class, description, callback) => {
+  return async (dispatch, getState) => {
+    const json = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        class: _class,
+        description,
+        owner: getState().user.name,
+        latitude: getState().sessions.latitude,
+        longitude: getState().sessions.longitude
+      })
+    };
+    const response = await fetch(`${baseUrl}${sessionCreate}`, json);
+    if (!response.ok) {
+      console.log('tw err session create');
+      return;
+    }
+
+    const respJson = await response.json();
+    const { name, email, activeSessions, _id } = respJson;
+    dispatch({
+      type: GET_USER_SESSIONS,
+      payload: respJson
+    });
+
+    callback();
+  }
+};
