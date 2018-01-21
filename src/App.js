@@ -10,6 +10,19 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
+
+  clicked1 = () => {
+    console.log('clicked1')
+  };
+
+  clicked2 = () => {
+    console.log('clicked2')
+  };
+
+  clicked3 = () => {
+    console.log('clicked3')
+  };
+
   render() {
     return (
       <Provider store={store}>
