@@ -11,7 +11,7 @@ class SessionList extends Component {
     console.log(sessionId)
   };
   renderCards(sessions) {
-    sessions.map((session) => {
+    return sessions.map((session) => {
       const { name, description, owner, _id } = session;
       const _class = session.class;
       return (
@@ -39,9 +39,10 @@ class SessionList extends Component {
   }
   render() {
     const { sessions = [] } = this.props;
+    console.log('tw render sess', sessions)
     return (
       <div>
-        {sessions.length > 0 && this.renderCards(sessions) }
+        {sessions.length !== 0 && this.renderCards(sessions) }
       </div>
     );
   }

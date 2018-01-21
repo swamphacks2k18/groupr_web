@@ -143,7 +143,6 @@ export const sessionGetServiceCall = () => {
 
     const respJson = await response.json();
 
-    console.log('tw get resp', respJson)
     dispatch({
       type: GET_USER_SESSIONS,
       payload: respJson
