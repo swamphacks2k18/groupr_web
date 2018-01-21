@@ -38,6 +38,28 @@
   margin-top: 30px;
 }
 
+.info-window {
+  width: 200px;
+  height: 100px;
+  font-size: small;
+}
+.info-window-row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: -20px;
+}
+
+.info-window-row > label {
+  padding: 1em 1em .5em 0;
+  text-align: left;
+  flex: 1;
+  font-weight: bold;
+}
+.info-window-row > p {
+  flex: 4;
+  text-align: left;
+}
+
 .form-row {
   display: flex;
   justify-content: flex-end;

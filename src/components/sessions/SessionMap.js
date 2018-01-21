@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import ReactGoogleMaps from '../common/GoogleMap';
 import { bindActionCreators } from "redux";
-import { Marker } from 'react-google-maps'
+import { Marker, InfoWindow } from 'react-google-maps'
 import {connect} from "react-redux";
 import { getInRadius, getLocations } from "../../actions";
-import { FormField, GrouprButton } from '../common';
+import { FormField, GrouprButton, GoogleMapMarker } from '../common';
 
 class SessionSelection extends Component {
   componentWillMount() {
@@ -20,9 +20,8 @@ class SessionSelection extends Component {
   generateMarkers(sessions) {
     return sessions.map((session) => {
       console.log('tw session', session)
-      const {latitude, longitude } = session;
       return (
-        <Marker key={`${latitude}${longitude}`} position={{ lat: latitude, lng: longitude }} />
+        <GoogleMapMarker session={session} />
       );
     })
   }
