@@ -56,8 +56,18 @@
   font-weight: bold;
 }
 .info-window-row > p {
-  flex: 4;
+  flex: 3;
   text-align: left;
+}
+
+.info-window-row > button {
+  flex: 2;
+  text-align: center;
+  background-color: darkgoldenrod;
+  color: white;
+  height: 20px;
+  width: 30px;
+  margin-top: 13px;
 }
 
 .form-row {

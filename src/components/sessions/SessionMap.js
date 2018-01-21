@@ -21,7 +21,7 @@ class SessionSelection extends Component {
     return sessions.map((session) => {
       console.log('tw session', session)
       return (
-        <GoogleMapMarker session={session} />
+        <GoogleMapMarker key={session._id} session={session} />
       );
     })
   }

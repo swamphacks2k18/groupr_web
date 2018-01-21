@@ -38,6 +38,7 @@ class GoogleMapMarker extends Component {
           <div className="info-window-row">
             <label>Owner:</label>
             <p>{owner}</p>
+            <button>join</button>
           </div>
         </div>
       </InfoWindow>
