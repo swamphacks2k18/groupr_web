@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
+import { logger } from 'redux-logger'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './reducers'
 
@@ -10,7 +11,8 @@ const initialState = {};
 const enhancers = [];
 const middleware = [
   thunk,
-  routerMiddleware(history)
+  routerMiddleware(history),
+  logger
 ];
 
 if (process.env.NODE_ENV === 'development') {

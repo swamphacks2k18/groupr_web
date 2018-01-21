@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux'
-import { logger } from 'redux-logger';
-import createHistory from 'history/createBrowserHistory'
-import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import reducer from './reducers';
+import store from './store';
 import logo from './logo.svg';
 import './App.css';
 import { HelloWorld } from './components/common';
-
-const getStore = () => {
-  return createStore(reducer, {}, applyMiddleware(ReduxThunk, logger));
-};
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +11,7 @@ class App extends Component {
   }
   render() {
     return (
-      <Provider store={getStore()}>
+      <Provider store={store}>
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
