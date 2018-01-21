@@ -25,6 +25,16 @@
   padding-left: 25%;
 }
 
+.loading-txt {
+  margin-top: 50px;
+  font-size: large;
+}
+
+.map-view {
+  height: 400px;
+  width: 400px;
+}
+
 .form-row {
   display: flex;
   justify-content: flex-end;
