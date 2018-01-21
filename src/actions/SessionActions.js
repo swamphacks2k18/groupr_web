@@ -1,5 +1,5 @@
-import { GET_SESSIONS } from './types';
-import { baseUrl, sessionGetInRadius } from './urls';
+import { GET_SESSIONS, GET_LOCATIONS } from './types';
+import { baseUrl, sessionGetInRadius, getLocationsUrl } from './urls';
 export const getInRadius = (radius) => {
   return async (dispatch) => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -37,4 +37,29 @@ const getInRadiusServiceCall = async (latitude, longitude, radius, dispatch) => 
     }
 
      return await response.json();
+  };
+
+export const getLocations = () => {
+  return async (dispatch) => {
+    const locationsUrl = `${baseUrl}${getLocationsUrl}`
+    const json = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+    const response = await fetch(locationsUrl, json);
+    if (!response.ok) {
+      console.log('tw err get in range');
+      return;
+    }
+
+    const responseJson = await response.json();
+    dispatch({
+      type: GET_LOCATIONS,
+      payload: {
+        localLocations: responseJson.localLocations,
+      }
+    });
+    }
   };

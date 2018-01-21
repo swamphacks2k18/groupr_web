@@ -6,3 +6,5 @@ export const CLEAR_STATE = 'CLEAR_STATE';
 
 // sesisons types
 export const GET_SESSIONS = 'GET_SESSIONS';
+
+export const GET_LOCATIONS = 'GET_LOCATIONS';

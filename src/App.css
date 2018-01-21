@@ -34,6 +34,9 @@
   height: 400px;
   width: 400px;
 }
+.btn-group {
+  margin-top: 30px;
+}
 
 .form-row {
   display: flex;
@@ -53,7 +56,7 @@
 
 .App-primary-btn {
   font-size: large;
-  border-radius: 30px;
+  border-radius: 3px;
   border: 5px;
   color: #ffffff;
   margin: 5px;
@@ -64,7 +67,7 @@
 
 .App-primary-btn-dark {
   font-size: large;
-  border-radius: 30px;
+  border-radius: 3px;
   border: 5px;
   color: #ffffff;
   margin: 5px;

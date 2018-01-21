@@ -10,3 +10,5 @@ export const sessionGetInRadius = '/session/getinradius';
 export const sessionJoin = '/session/join';
 export const sessionGet = '/session/view';
 export const sessionCancel = '/session/cancel';
+
+export const getLocationsUrl = '/location';

@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import ReactGoogleMaps from '../common/GoogleMap';
 import { bindActionCreators } from "redux";
 import {connect} from "react-redux";
-import { getInRadius } from "../../actions";
+import { getInRadius, getLocations } from "../../actions";
+import { FormField, GrouprButton } from '../common';
+
 class SessionSelection extends Component {
   componentWillMount() {
-    this.props.getInRadius(1);
+    this.props.getInRadius(200);
+    this.props.getLocations();
   }
   renderLoader() {
     return (
@@ -14,12 +17,19 @@ class SessionSelection extends Component {
   }
   render() {
     const { sessions, longitude, latitude } = this.props;
-    console.log(longitude, latitude)
+    console.log(longitude, latitude);
 
     if (longitude === 0 && latitude === 0) return this.renderLoader();
 
     return (
-      <ReactGoogleMaps lat={latitude} long={longitude} />
+      <div>
+        <ReactGoogleMaps lat={latitude} long={longitude} />
+        <div className="btn-group">
+          <GrouprButton text="Create Group" />
+          <GrouprButton text="View Your Groups" dark />
+        </div>
+      </div>
+
     );
   }
 }
@@ -34,7 +44,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getInRadius
+  getInRadius,
+  getLocations
 }, dispatch);
 
 SessionSelection = connect(mapStateToProps, mapDispatchToProps)(SessionSelection);
