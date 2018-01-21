@@ -1,19 +1,17 @@
 import React, { Component } from "react";
+import { Control, Form } from 'react-redux-form';
 
 class SessionSelection extends Component {
-  componentWillMount() {
-
-  }
+  handleSubmit = (val) => {
+    console.log(val)
+  };
   render() {
-    navigator.geolocation.getCurrentPosition(function(location) {
-      console.log(location.coords.latitude);
-      console.log(location.coords.longitude);
-      console.log(location.coords.accuracy);
-    });
     return (
-      <div>
-
-      </div>
+      <Form model="user" onSubmit={(val) => this.handleSubmit(val)}>
+        <label>Your name?</label>
+        <Control.text model=".name" />
+        <button>Create Session</button>
+      </Form>
     );
   }
 }
