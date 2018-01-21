@@ -1,5 +1,5 @@
 import {GET_SESSIONS, GET_LOCATIONS, CREATE_ACCOUNT} from './types';
-import {baseUrl, sessionGetInRadius, getLocationsUrl, sessionJoin, userCreate, sessionCreate} from './urls';
+import {baseUrl, sessionGetInRadius, getLocationsUrl, sessionJoin, userCreate, sessionCreate, sessionGet} from './urls';
 import {GET_USER_SESSIONS} from "./index";
 export const getInRadius = (radius) => {
   return async (dispatch) => {
@@ -125,5 +125,28 @@ export const sessionCreateServiceCall = (name, _class, description, callback) =>
     });
 
     callback();
+  }
+};
+export const sessionGetServiceCall = () => {
+  return async (dispatch, getState) => {
+    const json = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+    const response = await fetch(`${baseUrl}${sessionGet}?id=${getState().user.id}`, json);
+    if (!response.ok) {
+      console.log('tw err session get');
+      return;
+    }
+
+    const respJson = await response.json();
+
+    console.log('tw get resp', respJson)
+    dispatch({
+      type: GET_USER_SESSIONS,
+      payload: respJson
+    });
   }
 };

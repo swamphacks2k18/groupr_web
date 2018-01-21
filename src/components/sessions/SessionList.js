@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import {connect} from "react-redux";
-import { getInRadius, getLocations } from "../../actions";
+import { sessionGetServiceCall } from "../../actions";
 
 class SessionList extends Component {
+  componentWillMount() {
+    this.props.sessionGetServiceCall();
+  }
   onLeave = (sessionId) => () => {
     console.log(sessionId)
   };
@@ -35,9 +38,10 @@ class SessionList extends Component {
     });
   }
   render() {
+    const { sessions = [] } = this.props;
     return (
       <div>
-        { this.renderCards(this.props.sessions) }
+        {sessions.length > 0 && this.renderCards(sessions) }
       </div>
     );
   }
@@ -50,10 +54,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => bindActionCreators({
-//   leaveSession
-// }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  sessionGetServiceCall
+}, dispatch);
 
-SessionList = connect(mapStateToProps, null)(SessionList);
+SessionList = connect(mapStateToProps, mapDispatchToProps)(SessionList);
 
 export { SessionList };

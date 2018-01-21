@@ -21,7 +21,7 @@ export default (state = INITIAL_STATE, action) => {
       case GET_USER_SESSIONS:
         return {
           ...state,
-          sessions: action.payload.activeSessions,
+          sessions: action.payload.sessions,
         };
     case CLEAR_STATE:
       return INITIAL_STATE;
