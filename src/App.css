@@ -2,16 +2,13 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #5e6409;
+  height: 50px;
   padding: 20px;
   color: white;
+  justify-content: center;
+  align-items: center;
 }
 
 .App-title {
@@ -20,6 +17,28 @@
 
 .App-intro {
   font-size: large;
+}
+
+.App-form {
+  margin-top: 40px;
+  padding-right: 25%;
+  padding-left: 25%;
+}
+
+.form-row {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5em;
+}
+.form-row > label {
+  padding: .5em 1em .5em 0;
+  flex: 1;
+}
+.form-row > input {
+  flex: 2;
+}
+.form-row > input {
+  padding: .5em;
 }
 
 .App-primary-btn {

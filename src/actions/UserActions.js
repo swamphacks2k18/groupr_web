@@ -1,5 +1,5 @@
 import { LOGIN, GET_USER_SESSIONS } from './types';
-export const login = (email, password) => {
+export const login = (firstName, email, password) => {
   return async (dispatch, getState) => {
 
     dispatch({
