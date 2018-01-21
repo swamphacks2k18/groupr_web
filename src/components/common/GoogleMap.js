@@ -20,14 +20,14 @@ const MyMapComponent = compose(
   withGoogleMap
 )(props => (
   <GoogleMap defaultZoom={17} defaultCenter={{ lat: props.lat, lng: props.long }}>
-    <Marker position={{ lat: props.lat, lng: props.long }} />
+    {props.markers}
   </GoogleMap>
 ));
 
 const enhance = _.identity;
 
-const ReactGoogleMaps = ({ lat, long}) => [
-  <MyMapComponent lat={lat} long={long} key="map" />
+const ReactGoogleMaps = ({ lat, long, markers }) => [
+  <MyMapComponent markers={markers} lat={lat} long={long} key="map" />
 ];
 
 export default enhance(ReactGoogleMaps);
