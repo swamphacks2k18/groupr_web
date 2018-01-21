@@ -10,17 +10,18 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LOGIN || CREATE_ACCOUNT:
+    case CREATE_ACCOUNT:
       return {
         ...state,
         email: action.payload.email,
         name: action.payload.name,
-        sessions: action.payload.activeSessions
+        sessions: action.payload.activeSessions,
+        id: action.payload._id
       };
       case GET_USER_SESSIONS:
         return {
           ...state,
-          sessions: action.payload.sessions,
+          sessions: action.payload.activeSessions,
         };
     case CLEAR_STATE:
       return INITIAL_STATE;

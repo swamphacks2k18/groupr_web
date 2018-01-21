@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { Marker, InfoWindow } from 'react-google-maps'
-import { getInRadius, getLocations } from "../../actions";
+import { getInRadius, getLocations, joinSession } from "../../actions";
+import {connect} from "react-redux";
 
 class GoogleMapMarker extends Component {
   constructor(props) {
@@ -17,8 +18,12 @@ class GoogleMapMarker extends Component {
     });
   };
 
+  onJoin = (sessionId) => () => {
+    this.props.joinSession(sessionId);
+  };
+
   infoWindowCard(session) {
-    const { name, description, owner, endTime, startTime } = session;
+    const { name, description, owner, endTime, startTime, _id } = session;
     const _class = session.class;
     return (
       <InfoWindow>
@@ -38,7 +43,7 @@ class GoogleMapMarker extends Component {
           <div className="info-window-row">
             <label>Owner:</label>
             <p>{owner}</p>
-            <button>join</button>
+            <button onClick={this.onJoin(_id)}>join</button>
           </div>
         </div>
       </InfoWindow>
@@ -70,18 +75,10 @@ class GoogleMapMarker extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  const { latitude, longitude, sessions } = state.sessions;
-  return {
-    latitude,
-    longitude,
-    sessions
-  };
-};
-
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getInRadius,
-  getLocations
+  joinSession
 }, dispatch);
+
+GoogleMapMarker = connect(null, mapDispatchToProps)(GoogleMapMarker);
 
 export { GoogleMapMarker };

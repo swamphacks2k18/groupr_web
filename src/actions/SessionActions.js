@@ -1,5 +1,6 @@
 import { GET_SESSIONS, GET_LOCATIONS } from './types';
-import { baseUrl, sessionGetInRadius, getLocationsUrl } from './urls';
+import { baseUrl, sessionGetInRadius, getLocationsUrl, sessionJoin } from './urls';
+import {GET_USER_SESSIONS} from "./index";
 export const getInRadius = (radius) => {
   return async (dispatch) => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -39,9 +40,38 @@ const getInRadiusServiceCall = async (latitude, longitude, radius, dispatch) => 
      return await response.json();
   };
 
+export const joinSession = (sessionId) => {
+  return async (dispatch, getState) => {
+    const locationsUrl = `${baseUrl}${sessionJoin}`;
+    const id = getState().user.id;
+    console.log('tw user id', id)
+    const json = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sessionId,
+        userId: id,
+      })
+    };
+    const response = await fetch(locationsUrl, json);
+    if (!response.ok) {
+      console.log('tw err join session');
+      return;
+    }
+
+    const responseJson = await response.json();
+    dispatch({
+      type: GET_USER_SESSIONS,
+      payload: responseJson,
+    });
+    }
+  };
+
 export const getLocations = () => {
   return async (dispatch) => {
-    const locationsUrl = `${baseUrl}${getLocationsUrl}`
+    const locationsUrl = `${baseUrl}${getLocationsUrl}`;
     const json = {
       method: 'GET',
       headers: {

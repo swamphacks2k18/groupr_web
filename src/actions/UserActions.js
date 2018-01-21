@@ -1,6 +1,7 @@
 import { LOGIN, GET_USER_SESSIONS, CREATE_ACCOUNT } from './types';
 import { baseUrl, userCreate, userLogin } from './urls';
 export const login = (firstName, email, password, callback) => {
+  const _email = email;
   return async (dispatch) => {
     const json = {
       method: 'POST',
@@ -9,7 +10,7 @@ export const login = (firstName, email, password, callback) => {
       },
       body: JSON.stringify({
         name: firstName,
-        email,
+        email: _email,
         password
       })
     };
@@ -20,15 +21,22 @@ export const login = (firstName, email, password, callback) => {
     }
 
     const respJson = await response.json();
+    console.log('tw create', respJson)
+    const { name, email, activeSessions, _id } = respJson;
     dispatch({
       type: CREATE_ACCOUNT,
       payload: {
-        name: respJson.name,
-        email: respJson.email,
-        sessions: respJson.activeSessions
-      }
+        name,
+        email,
+        sessions: activeSessions,
+        _id,
+      },
     });
 
     callback();
   }
 };
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}

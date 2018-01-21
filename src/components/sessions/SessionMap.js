@@ -43,7 +43,6 @@ class SessionSelection extends Component {
           <GrouprButton text="View Your Groups" dark />
         </div>
       </div>
-
     );
   }
 }
