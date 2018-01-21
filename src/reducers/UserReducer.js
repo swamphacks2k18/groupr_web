@@ -15,6 +15,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         email: action.payload.email,
         name: action.payload.name,
+        sessions: action.payload.activeSessions
       };
       case GET_USER_SESSIONS:
         return {

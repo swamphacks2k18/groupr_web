@@ -7,8 +7,11 @@ import { login } from '../../actions';
 
 class UserAuth extends Component {
   handleSubmit = () => {
-    const { firstName, email, password } = this.props.userSignupForm;
-    this.props.login(firstName, email, password)
+    const { firstName, email, password } = this.props.userSignupForm.values;
+    console.log(this.props)
+    this.props.login(firstName, email, password, () => {
+      this.props.history.push('/map');
+    });
   };
   render() {
     return (

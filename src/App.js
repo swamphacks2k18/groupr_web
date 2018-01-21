@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './store';
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
 import UserAuth from './components/users/UserAuth';
+import { Header } from './components/common'
 
 class App extends Component {
   constructor(props) {
@@ -12,12 +14,15 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <header className="App-header">
-            <h1 className="App-title">Groupr</h1>
-          </header>
-          <UserAuth />
-        </div>
+        <BrowserRouter>
+          <div className="App">
+            <Header />
+            <Switch>
+              <Route path="/map" component={UserAuth}/>
+              <Route path="/" component={UserAuth}/>
+            </Switch>
+          </div>
+        </BrowserRouter>
       </Provider>
     );
   }
